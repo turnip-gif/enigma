@@ -82,9 +82,9 @@
   <body>
     <!-- Background video -->
     <video class="bg-video" autoplay loop muted playsinline>
-  <source src="background-forest.mp4" type="video/mp4" />
-</video>
-
+      <source src="background-forest.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
 
     <!-- Navigation -->
     <nav>
@@ -103,8 +103,8 @@
       <h2>Upcoming Event</h2>
       <p>Catch me live at Kruttverket on 22.02.2025 – Downtempo meets deep house.</p>
       <div class="soundcloud">
-        <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
-          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/petr-t-ma-71956515/kruttbeat-kruttverket-20022025-turnip-robvan&color=%2377f&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+        <iframe width="100%" height="166" scrolling="no" frameborder="no"
+          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/petr-t-ma-71956515/kruttbeat-kruttverket-20022025-turnip-robvan&color=%2377f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
         </iframe>
       </div>
     </section>
@@ -118,7 +118,15 @@
       <h2>Get in Touch</h2>
       <p>DM me on Instagram <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
     </section>
+
+    <!-- Play video on first interaction -->
+    <script>
+      window.addEventListener('click', () => {
+        const video = document.querySelector('.bg-video');
+        if (video) {
+          video.play().catch(e => console.log("Autoplay failed:", e));
+        }
+      });
+    </script>
   </body>
 </html>
-
-working video
