@@ -189,5 +189,21 @@
         });
       });
     </script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const video = document.querySelector(".bg-video");
+        if (video) {
+          const playPromise = video.play();
+          if (playPromise !== undefined) {
+            playPromise.catch(() => {
+              console.log("Autoplay blocked, waiting for user interaction.");
+              window.addEventListener("click", () => {
+                video.play();
+              }, { once: true });
+            });
+          }
+        }
+      });
+    </script>
   </body>
 </html>
