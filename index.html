@@ -93,13 +93,18 @@
         user-select: none;
         transition: transform 0.2s ease;
       }
+          .content {
+        position: relative;
+        z-index: 1;
+      }
     </style>
   </head>
   <body>
-    <video class="bg-video" autoplay muted loop playsinline preload="auto">
+    <div class="content">$1<video class="bg-video" autoplay muted loop playsinline preload="auto">
       <source src="fog.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
+
 
     <nav>
       <a href="#hero">Home</a>
@@ -205,5 +210,6 @@
         }
       });
     </script>
+      </div>
   </body>
 </html>
