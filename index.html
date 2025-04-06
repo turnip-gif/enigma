@@ -12,13 +12,17 @@
       html, body {
         margin: 0;
         padding: 0;
-        overflow: hidden;
+        overflow-x: hidden;
         background: black;
         font-family: 'Roboto Mono', monospace;
       }
 
       canvas {
         display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
       }
     </style>
   </head>
@@ -31,13 +35,11 @@
       canvas.height = window.innerHeight;
 
       const letters = 'ENIGMA'.split('');
-      const cols = Math.floor(canvas.width / 50);
-      const rows = Math.floor(canvas.height / 50);
       const particles = [];
       const mouse = { x: -1000, y: -1000 };
 
       class Particle {
-        constructor(x, y, isMenu = false, menuLabel = '') {
+        constructor(x, y, isMenu = false, menuLabel = '', link = '') {
           this.x = x;
           this.y = y;
           this.char = isMenu ? menuLabel : letters[Math.floor(Math.random() * letters.length)];
@@ -46,6 +48,7 @@
           this.size = this.baseSize;
           this.isMenu = isMenu;
           this.menuLabel = menuLabel;
+          this.link = link;
         }
         draw() {
           ctx.font = `${this.size}px 'Roboto Mono'`;
@@ -64,49 +67,42 @@
             this.size += (this.baseSize - this.size) * 0.1;
           }
         }
+        checkClick(mx, my) {
+          if (this.isMenu) {
+            const textWidth = ctx.measureText(this.char).width;
+            const inX = mx > this.x && mx < this.x + textWidth;
+            const inY = my < this.y && my > this.y - this.size;
+            if (inX && inY) {
+              window.location.href = this.link;
+            }
+          }
+        }
       }
 
       const menuItems = ['About', 'Events', 'Records', 'Contact'];
+      const menuLinks = ['#about', '#events', '#records', '#contact'];
       const startX = 50;
       const spacingX = 120;
       const menuY = 40;
-      const menuLinks = ['#about', '#events', '#records', '#contact'];
+
       for (let i = 0; i < menuItems.length; i++) {
         const x = startX + i * spacingX;
         const y = menuY;
-        const label = menuItems[i];
-        const link = menuLinks[i];
-
-        const menuParticle = new Particle(x, y, true, label);
-
-        menuParticle.onClick = function(mx, my) {
-          const textWidth = ctx.measureText(label).width;
-          const inX = mx > this.x && mx < this.x + textWidth;
-          const inY = my < this.y && my > this.y - this.size;
-          if (inX && inY) {
-            window.location.href = link;
-          }
-        };
-
-        particles.push(menuParticle);
+        particles.push(new Particle(x, y, true, menuItems[i], menuLinks[i]));
       }
-
-      canvas.addEventListener('click', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const mx = e.clientX - rect.left;
-        const my = e.clientY - rect.top;
-        particles.forEach(p => {
-          if (p.isMenu && typeof p.onClick === 'function') {
-            p.onClick(mx, my);
-          }
-        });
-      });
 
       for (let y = 90; y < canvas.height; y += 50) {
         for (let x = 20; x < canvas.width; x += 50) {
           particles.push(new Particle(x, y));
         }
       }
+
+      canvas.addEventListener('click', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mx = e.clientX - rect.left;
+        const my = e.clientY - rect.top;
+        particles.forEach(p => p.checkClick(mx, my));
+      });
 
       function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -124,10 +120,12 @@
         for (let i = 0; i < amountToFlip; i++) {
           const index = Math.floor(Math.random() * particles.length);
           const p = particles[index];
-          const newChar = letters[Math.floor(Math.random() * letters.length)];
-          p.char = newChar;
-          p.glow = true;
-          setTimeout(() => p.glow = false, 300);
+          if (!p.isMenu) {
+            const newChar = letters[Math.floor(Math.random() * letters.length)];
+            p.char = newChar;
+            p.glow = true;
+            setTimeout(() => p.glow = false, 300);
+          }
         }
       }, 200);
 
