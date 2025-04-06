@@ -51,7 +51,7 @@
         height: 100vh;
         object-fit: cover;
         z-index: -1;
-        filter: brightness(0.5) contrast(1.1);
+        filter: brightness(0.3) contrast(1.1);
         background: #000;
       }
 
@@ -89,8 +89,9 @@
       .floating-letters span {
         position: absolute;
         font-size: 2rem;
-        color: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.2);
         user-select: none;
+        transition: transform 0.2s ease;
       }
     </style>
   </head>
@@ -135,7 +136,6 @@
     </section>
 
     <script>
-      // Intersection observer for section fade-ins
       const sections = document.querySelectorAll('section');
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -145,11 +145,8 @@
         });
       }, { threshold: 0.1 });
 
-      sections.forEach(section => {
-        observer.observe(section);
-      });
+      sections.forEach(section => observer.observe(section));
 
-      // Floating ENIGMA letters animation
       const container = document.getElementById('floatingLetters');
       const letters = ['E', 'N', 'I', 'G', 'M', 'A'];
 
@@ -160,6 +157,7 @@
         span.style.top = Math.random() * 100 + 'vh';
         container.appendChild(span);
 
+        // floating drift animation
         gsap.to(span, {
           x: () => Math.random() * 100 - 50,
           y: () => Math.random() * 100 - 50,
@@ -169,6 +167,27 @@
           ease: "sine.inOut"
         });
       }
+
+      // Mouse interaction
+      document.addEventListener('mousemove', (e) => {
+        document.querySelectorAll('.floating-letters span').forEach(span => {
+          const dx = span.offsetLeft - e.clientX;
+          const dy = span.offsetTop - e.clientY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 100) {
+            gsap.to(span, {
+              scale: 1.4,
+              duration: 0.3
+            });
+          } else {
+            gsap.to(span, {
+              scale: 1,
+              duration: 0.5
+            });
+          }
+        });
+      });
     </script>
   </body>
 </html>
