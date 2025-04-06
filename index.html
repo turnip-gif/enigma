@@ -1,108 +1,56 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Turnip - DJ & Architect</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+    <title>Turnip - Debug Test</title>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
       body, html {
-        min-height: 100%;
-        font-family: 'Rubik', sans-serif;
-        color: #eee;
-        scroll-behavior: smooth;
+        margin: 0;
+        height: 100%;
         background: black;
+        color: white;
+        font-family: sans-serif;
       }
 
-      video.bg-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        object-fit: cover;
-        z-index: -1;
-        filter: brightness(0.5) contrast(1.2);
-        background: red; /* just for debugging – remove later */
-      }
-
-      header, section {
-        padding: 120px 20px;
-        text-align: center;
-        /* opacity: 0;
-        animation: fadeIn 2s ease forwards; */
-      }
-
-      header {
-        font-size: 2.5em;
-        /* animation-delay: 0.5s; */
-      }
-
-      section {
-        background: rgba(0, 0, 0, 0.5);
-        margin: 100px 0;
-        min-height: 80vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-
-      a {
-        color: #77f;
-        text-decoration: none;
-        font-weight: bold;
-      }
-
-      nav {
-        position: fixed;
-        top: 10px;
+      video {
         width: 100%;
-        text-align: center;
-        z-index: 10;
+        height: 100%;
+        object-fit: cover;
+        z-index: 0;
+        background: red; /* DEBUG COLOR: You should see this if video doesn't load */
+        border: 10px solid lime; /* DEBUG OUTLINE */
       }
 
-      nav a {
-        margin: 0 15px;
-        font-size: 1.1em;
+      .fallback {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2rem;
+        z-index: 2;
       }
-
-      .soundcloud {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-      }
-
-      iframe {
-        max-width: 100%;
-        border: none;
-        border-radius: 12px;
-      }
-
-      /* @keyframes fadeIn {
-        to {
-          opacity: 1;
-        }
-      } */
     </style>
   </head>
   <body>
-    <!-- Background video -->
-    <video class="bg-video" autoplay loop playsinline muted preload="auto">
+    <video id="bg" autoplay muted loop playsinline preload="auto">
       <source src="background-forest.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
+      <div class="fallback">🚫 Your browser doesn't support HTML5 video.</div>
     </video>
 
-    <!-- Navigation -->
-    <nav>
-      <a href="#event">Event</a>
-      <a href="#bio">Bio</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <script>
+      const video = document.getElementById('bg');
 
-    <!-- Main sections -->
-    <header>
-      <h1>Hello, I'm
+      if (!video) {
+        console.log("❌ Video tag not found.");
+      } else {
+        console.log("✅ Video tag found.");
+        video.addEventListener('loadeddata', () => {
+          console.log("✅ Video loaded successfully.");
+        });
+        video.addEventListener('error', (e) => {
+          console.error("❌ Video error:", e);
+        });
+      }
+    </script>
+  </body>
+</html>
