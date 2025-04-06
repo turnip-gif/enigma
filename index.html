@@ -22,23 +22,24 @@
         position: fixed;
         top: 0;
         left: 0;
-        min-width: 100%;
-        min-height: 100%;
+        width: 100vw;
+        height: 100vh;
         object-fit: cover;
         z-index: -1;
         filter: brightness(0.5) contrast(1.2);
+        background: red; /* just for debugging – remove later */
       }
 
       header, section {
         padding: 120px 20px;
         text-align: center;
-        opacity: 0;
-        animation: fadeIn 2s ease forwards;
+        /* opacity: 0;
+        animation: fadeIn 2s ease forwards; */
       }
 
       header {
         font-size: 2.5em;
-        animation-delay: 0.5s;
+        /* animation-delay: 0.5s; */
       }
 
       section {
@@ -81,11 +82,11 @@
         border-radius: 12px;
       }
 
-      @keyframes fadeIn {
+      /* @keyframes fadeIn {
         to {
           opacity: 1;
         }
-      }
+      } */
     </style>
   </head>
   <body>
@@ -104,41 +105,4 @@
 
     <!-- Main sections -->
     <header>
-      <h1>Hello, I'm Turnip</h1>
-      <p>Architect & DJ in Oslo</p>
-    </header>
-
-    <section id="event">
-      <h2>Upcoming Event</h2>
-      <p>Catch me live at Kruttverket on 22.02.2025 – Downtempo meets deep house.</p>
-      <div class="soundcloud">
-        <iframe width="100%" height="166" scrolling="no" frameborder="no"
-          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/petr-t-ma-71956515/kruttbeat-kruttverket-20022025-turnip-robvan&color=%2377f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-        </iframe>
-      </div>
-    </section>
-
-    <section id="bio">
-      <h2>About Me</h2>
-      <p>I blend architecture and music, shaping spaces by day and soundscapes by night.</p>
-    </section>
-
-    <section id="contact">
-      <h2>Get in Touch</h2>
-      <p>DM me on Instagram <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
-    </section>
-
-    <!-- Play video on first interaction -->
-    <script>
-      const video = document.querySelector('.bg-video');
-      if (video) {
-        video.play().catch(err => {
-          console.log("Autoplay blocked. Waiting for user interaction...");
-          window.addEventListener('click', () => {
-            video.play().catch(e => console.log("Manual play also failed:", e));
-          });
-        });
-      }
-    </script>
-  </body>
-</html>
+      <h1>Hello, I'm
