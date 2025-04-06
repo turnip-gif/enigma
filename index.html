@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Turnip - DJ & Architect</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turnip & ROBVANN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400&display=swap" rel="stylesheet">
     <style>
       * {
         margin: 0;
@@ -13,10 +14,32 @@
 
       html, body {
         height: 100%;
-        font-family: 'Rubik', sans-serif;
-        color: #eee;
+        font-family: 'Roboto Mono', monospace;
         background: black;
+        color: #eee;
         overflow-x: hidden;
+        scroll-behavior: smooth;
+      }
+
+      section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 100px 20px;
+        position: relative;
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 1s ease;
+      }
+
+      section.visible {
+        opacity: 1;
+      }
+
+      h1, h2 {
+        margin-bottom: 20px;
       }
 
       video.bg-video {
@@ -27,121 +50,83 @@
         height: 100vh;
         object-fit: cover;
         z-index: -1;
-        filter: brightness(0.5) contrast(1.2);
-        background: #111;
-        border: 2px solid lime; /* TEMP debug */
-      }
-
-      header, section {
-        margin: 100px 0;
-        min-height: 80vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-shadow: 0 0 10px rgba(0,0,0,0.6);
-        animation-delay: 1.5s;
-      }
-
-      header {
-        font-size: 2.5em;
-        animation-delay: 1s;
-      }
-
-      section {
-        background: rgba(0, 0, 0, 0.5);
-        margin: 100px 0;
-        min-height: 80vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+        filter: brightness(0.5) contrast(1.1);
+        background: #000;
       }
 
       nav {
         position: fixed;
-        top: 10px;
-        width: 100%;
-        text-align: center;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 10;
       }
 
       nav a {
-        margin: 0 15px;
-        font-size: 1.1em;
-        color: #77f;
+        color: #ccc;
+        margin: 0 10px;
         text-decoration: none;
-        font-weight: bold;
+        font-size: 0.9em;
+        letter-spacing: 0.05em;
       }
 
-      .soundcloud {
-        margin-top: 30px;
-        display: flex;
-        justify-content: center;
-      }
-
-      iframe {
-        max-width: 100%;
-        border: none;
-        border-radius: 12px;
-      }
-
-      @keyframes fadeIn {
-        to {
-          opacity: 1;
-        }
+      nav a:hover {
+        color: white;
       }
     </style>
   </head>
   <body>
-    <!-- Background video -->
     <video class="bg-video" autoplay muted loop playsinline preload="auto">
-      <source src="background-forest.mp4" type="video/mp4">
+      <source src="background-forest.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
 
-    <!-- Navigation -->
     <nav>
-      <a href="#event">Event</a>
-      <a href="#bio">Bio</a>
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#events">Events</a>
+      <a href="#records">Records</a>
       <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Main sections -->
-    <header>
-      <h1>Hello, I'm Turnip</h1>
-      <p>Architect & DJ in Oslo</p>
-    </header>
-
-    <section id="event">
-      <h2>Upcoming Event</h2>
-      <p>Catch me live at Kruttverket on 22.02.2025 – Downtempo meets deep house.</p>
-      <div class="soundcloud">
-        <iframe width="100%" height="166" scrolling="no" frameborder="no"
-          src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/petr-t-ma-71956515/kruttbeat-kruttverket-20022025-turnip-robvan&color=%2377f&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
-        </iframe>
-      </div>
+    <section id="hero">
+      <h1>Turnip & ROBVANN</h1>
+      <p>Deep. Hypnotic. Techno.</p>
     </section>
 
-    <section id="bio">
-      <h2>About Me</h2>
-      <p>I blend architecture and music, shaping spaces by day and soundscapes by night.</p>
+    <section id="about">
+      <h2>About</h2>
+      <p>We are two friends and DJs exploring the minimal, hypnotic edge of techno and sound culture. Oslo-based and spiritually nomadic.</p>
+    </section>
+
+    <section id="events">
+      <h2>Events</h2>
+      <p>Catch us at selected underground gatherings. Coming soon: Kruttverket 22.02.2025.</p>
+    </section>
+
+    <section id="records">
+      <h2>Records</h2>
+      <p>Our first releases are in the making. Stay tuned for original tracks, mixes and live sets.</p>
     </section>
 
     <section id="contact">
-      <h2>Get in Touch</h2>
-      <p>DM me on Instagram <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
+      <h2>Contact</h2>
+      <p>DM us on Instagram: <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
     </section>
 
-    <!-- Autoplay fallback script -->
     <script>
-      const video = document.querySelector('.bg-video');
-      if (video) {
-        video.play().catch(err => {
-          console.log("Autoplay blocked. Waiting for user interaction...");
-          window.addEventListener('click', () => {
-            video.play().catch(e => console.log("Manual play also failed:", e));
-          });
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
         });
-      }
+      }, { threshold: 0.1 });
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
     </script>
   </body>
 </html>
