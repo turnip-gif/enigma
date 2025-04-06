@@ -100,12 +100,11 @@
     </style>
   </head>
   <body>
-    <div class="content">$1<video class="bg-video" autoplay muted loop playsinline preload="auto">
+    <video class="bg-video" autoplay muted loop playsinline preload="auto">
       <source src="fog.mp4" type="video/mp4" />
       Your browser does not support the video tag.
     </video>
-
-
+    <div class="content">
     <nav>
       <a href="#hero">Home</a>
       <a href="#about">About</a>
@@ -139,7 +138,7 @@
       <h2>Contact</h2>
       <p>DM us on Instagram: <a href="https://instagram.com/yourhandle" target="_blank">@yourhandle</a></p>
     </section>
-
+    </div>
     <script>
       const sections = document.querySelectorAll('section');
       const observer = new IntersectionObserver((entries) => {
