@@ -28,17 +28,18 @@
         object-fit: cover;
         z-index: -1;
         filter: brightness(0.5) contrast(1.2);
-        background: red;
-        border: 10px solid lime;
       }
 
       header, section {
         padding: 120px 20px;
         text-align: center;
+        opacity: 0;
+        animation: fadeIn 2s ease forwards;
       }
 
       header {
         font-size: 2.5em;
+        animation-delay: 0.5s;
       }
 
       section {
@@ -76,6 +77,12 @@
         max-width: 100%;
         border: none;
         border-radius: 12px;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
       }
     </style>
   </head>
