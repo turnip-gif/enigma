@@ -253,24 +253,9 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 sections.forEach(section => observer.observe(section));
-      }, { threshold: 0.1 });
-
-      sections.forEach(section => observer.observe(section));
-
-      
-      }
-
-      // Mouse interaction
-      
-          } else {
-            gsap.to(span, {
-              scale: 1,
-              duration: 0.5
-            });
-          }
-        });
-      });
-    document.addEventListener('DOMContentLoaded', () => {
+</script>
+<script>
+, () => {
   const enigmaTitle = document.getElementById('title-enigma');
   const aboutObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
